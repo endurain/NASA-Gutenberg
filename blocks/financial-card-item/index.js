@@ -13,7 +13,7 @@ registerBlockType('lendedu/financial-card-item', {
     edit: ({ attributes, setAttributes }) => {
         // Function to update the icon URL attribute
         const onSelectImage = (media) => {
-            setAttributes({ iconUrl: media.url });
+            setAttributes({ imgUrl: media.url });
         };
 
         return (
@@ -21,12 +21,18 @@ registerBlockType('lendedu/financial-card-item', {
                 <MediaUpload
                     onSelect={onSelectImage}
                     allowedTypes={['image']}
-                    value={attributes.iconUrl}
+                    value={attributes.imgUrl}
                     render={({ open }) => (
                         <Button className="financial-card-item__media" onClick={open}>
-                            {!attributes.iconUrl ? 'Upload Icon' : <img src={attributes.iconUrl} alt="" />}
+                            {!attributes.imgUrl ? 'Upload Image' : <img src={attributes.imgUrl} alt="" />}
                         </Button>
                     )}
+                />
+                <RichText
+                    tagName="h2"
+                    placeholder="Add your heading..."
+                    value={attributes.heading}
+                    onChange={(heading) => setAttributes({ heading })}
                 />
                 <RichText
                     tagName="p"
@@ -48,17 +54,19 @@ registerBlockType('lendedu/financial-card-item', {
             {attributes.link ? (
               <a href={attributes.link} className="financial-card-item__link">
                 <div className="financial-card-item">
-                  {attributes.iconUrl && (
-                    <img className="financial-card-item__icon" src={attributes.iconUrl} alt="" />
+                  {attributes.imgUrl && (
+                    <img className="financial-card-item__icon" src={attributes.imgUrl} alt="" />
                   )}
-                  <RichText.Content tagName="p" value={attributes.description} />
+                  <RichText.Content tagName="h3" value={attributes.heading} />
+                  <RichText.Content tagName="h3" value={attributes.description} />
                 </div>
               </a>
             ) : (
               <div className="financial-card-item">
-                {attributes.iconUrl && (
-                  <img className="financial-card-item__icon" src={attributes.iconUrl} alt="" />
+                {attributes.imgUrl && (
+                  <img className="financial-card-item__icon" src={attributes.imgUrl} alt="" />
                 )}
+                <RichText.Content tagName="h3" value={attributes.heading} />
                 <RichText.Content tagName="p" value={attributes.description} />
               </div>
             )}

@@ -21,4 +21,9 @@
         min-width: 26px;
         width: 26px; 
     }
+
+    &__link {
+        display: flex;
+        justify-content: center;
+    }
 }
