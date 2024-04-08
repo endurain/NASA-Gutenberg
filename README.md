@@ -2,7 +2,11 @@ This is a custom Gutenberg block theme that allows for easily addition of new cu
 
 
 This project was built as an example for LendEDU as a method to showcase how certain blocks on the site could be created as custom Gutenberg blocks. This is just a demonstration.
+
+Front-end
 ![front](https://github.com/endurain/lendedu/assets/37851511/e8bf81b1-2d45-44ef-b23a-0a6a94378602)
+
+Back-end editor view
 ![back](https://github.com/endurain/lendedu/assets/37851511/f8332310-91d4-4e67-8262-fa84e3e399e0)
 
 
