@@ -1,0 +1,15 @@
+{
+    "iconUrl": {
+        "type": "string",
+        "default": ""
+    },
+    "description": {
+        "type": "string",
+        "source": "html",
+        "selector": "p"
+    },
+    "link": {
+        "type": "string",
+        "default": ""
+    }
+}

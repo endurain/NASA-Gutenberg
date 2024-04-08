@@ -1,0 +1,8 @@
+.financial-card_items {
+
+    .block-editor-block-list__layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr; /* This creates three columns */
+        grid-gap: 16px; 
+    }
+}
