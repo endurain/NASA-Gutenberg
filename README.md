@@ -1,6 +1,5 @@
 This is a custom Gutenberg block theme that allows for easily addition of new custom blocks. 
 
-![LendEDU IMG](https://github.com/endurain/BM_React_Table/blob/main/image.png)
 
 This project was built as an example for LendEDU as a method to showcase how certain blocks on the site could be created as custom Gutenberg blocks. This is just a demonstration.
 ![front](https://github.com/endurain/lendedu/assets/37851511/e8bf81b1-2d45-44ef-b23a-0a6a94378602)
