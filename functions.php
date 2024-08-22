@@ -40,3 +40,7 @@ add_action('after_setup_theme', 'setup_theme_supported_features');
 
 // Include the block registration file
 include get_stylesheet_directory() . '/register-blocks.php';
+
+// Include api manager
+require_once get_stylesheet_directory() . '/inc/api-manager.php';
+

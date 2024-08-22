@@ -5,7 +5,8 @@ function register_gutenberg_blocks() {
 
     // Specify which blocks are dynamic 
     $dynamic_blocks = [
-        'card'
+        'card',
+        'rover-slider'
     ];
 
     foreach ($block_directories as $dir) {
