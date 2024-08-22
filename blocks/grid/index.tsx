@@ -7,8 +7,8 @@ import attributes from './attributes.json';
 const DEFAULT_IMAGE_URL = '/wp-content/themes/twentytwentyfour-child/images/500x500.png';
 
 
-registerBlockType('lendedu/financial-card', {
-    title: 'Financial Card',
+registerBlockType('nasag/grid', {
+    title: 'Grid',
     icon: 'grid-view',
     category: 'layout',
     attributes, // Use the imported attributes
@@ -34,7 +34,7 @@ registerBlockType('lendedu/financial-card', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="financial-card" style={{ backgroundImage: `url(${attributes.backgroundImage})` }}>
+                <div className="grid" style={{ backgroundImage: `url(${attributes.backgroundImage})` }}>
                     <RichText
                         tagName="h2"
                         placeholder="Add your heading..."
@@ -47,9 +47,9 @@ registerBlockType('lendedu/financial-card', {
                         value={attributes.description}
                         onChange={(description) => setAttributes({ description })}
                     />
-                    <div className="financial-card_items">
+                    <div className="grid_items">
                         <InnerBlocks
-                            allowedBlocks={['lendedu/financial-card-item']}
+                            allowedBlocks={['nasag/grid-item']}
                             renderAppender={() => (
                                 <InnerBlocks.ButtonBlockAppender />
                             )}
@@ -66,10 +66,10 @@ registerBlockType('lendedu/financial-card', {
           };
         
         return (
-            <div className="financial-card" style={bgstyle}>
+            <div className="grid" style={bgstyle}>
                 <RichText.Content tagName="h2" value={attributes.heading} />
                 <RichText.Content tagName="p" value={attributes.description} />
-                <div className="financial-card-items">
+                <div className="grid-items">
                     <InnerBlocks.Content />
                 </div>
             </div>

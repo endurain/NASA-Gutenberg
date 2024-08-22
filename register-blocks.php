@@ -4,7 +4,9 @@ function register_gutenberg_blocks() {
     $block_directories = glob(get_stylesheet_directory() . '/blocks/*', GLOB_ONLYDIR);
 
     // Specify which blocks are dynamic 
-    $dynamic_blocks = array('financial-card');
+    $dynamic_blocks = [
+        'card'
+    ];
 
     foreach ($block_directories as $dir) {
         $block_name = basename($dir);
@@ -43,7 +45,7 @@ function register_gutenberg_blocks() {
         }
 
         // Register the block type with WordPress, including potential render callback.
-        register_block_type("lendedu/{$block_name}", $block_args);
+        register_block_type("nasag/{$block_name}", $block_args);
 
         // Enqueue the editor script and style.
         add_action('enqueue_block_editor_assets', function() use ($editor_script_path, $asset_file, $block_name, $editor_style_path) {

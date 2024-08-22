@@ -12,5 +12,13 @@
     "backgroundImage": {
         "type": "string",
         "default": ""
+    },
+    "iconUrl": {
+        "type": "string",
+        "default": ""
+    },
+    "link": {
+        "type": "string",
+        "default": ""
     }
 }

@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 
 const getBlockEntries = () => {
-  const jsFiles = glob.sync(path.resolve(__dirname, 'blocks/**/index.js'));
+  const jsFiles = glob.sync(path.resolve(__dirname, 'blocks/**/index.{js,ts,tsx}'));
   const scssEditorFiles = glob.sync(path.resolve(__dirname, 'blocks/**/editor-style.scss'));
   const scssStyleFiles = glob.sync(path.resolve(__dirname, 'blocks/**/style.scss'));
   
@@ -54,12 +54,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-react',
+              '@babel/preset-typescript' 
+            ],
           },
         },
       },
@@ -72,6 +76,10 @@ module.exports = {
         ],
       },
     ],
+  },
+
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
 
   plugins: [

@@ -1,21 +1,27 @@
-import { registerBlockType } from '@wordpress/blocks';
+import { BlockConfiguration, registerBlockType } from '@wordpress/blocks';
 import { RichText, InnerBlocks, InspectorControls, MediaUpload  } from '@wordpress/block-editor';
 import { Button, PanelBody } from '@wordpress/components';
 import attributes from './attributes.json';
 
-// Define the default image URL (absolute path)
-const DEFAULT_IMAGE_URL = '/wp-content/themes/twentytwentyfour-child/images/500x500.png';
+interface BlockAttributes {
+    heading: string;
+    description: string;
+    backgroundImage: string;
+    backgroundImageId: number;
+}
 
-
-registerBlockType('lendedu/financial-grid', {
-    title: 'Financial Grid',
+registerBlockType<BlockAttributes>('nasag/card', {
+    title: 'Card',
     icon: 'grid-view',
     category: 'layout',
-    attributes, // Use the imported attributes
+    attributes: attributes as BlockConfiguration<BlockAttributes>['attributes'], // Use the imported attributes
     edit: ({ attributes, setAttributes }) => {
         // Function to update the background image attribute
-        const onSelectImage = (media) => {
-            setAttributes({ backgroundImage: media.url });
+        const onSelectImage = (media: {id: number; url: string}) => {
+            setAttributes({ 
+                backgroundImage: media.url,
+                backgroundImageId: media.id
+             });
         };
         return (
             <>
@@ -24,7 +30,7 @@ registerBlockType('lendedu/financial-grid', {
                         <MediaUpload
                             onSelect={onSelectImage}
                             allowedTypes={['image']}
-                            value={attributes.backgroundImage}
+                            value={attributes.backgroundImageId}
                             render={({ open }) => (
                                 <Button className="button button-large" onClick={open}>
                                     {!attributes.backgroundImage ? 'Select Background Image' : 'Change Background Image'}
@@ -34,7 +40,7 @@ registerBlockType('lendedu/financial-grid', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="financial-grid" style={{ backgroundImage: `url(${attributes.backgroundImage})` }}>
+                <div className="card" style={{ backgroundImage: `url(${attributes.backgroundImage})` }}>
                     <RichText
                         tagName="h2"
                         placeholder="Add your heading..."
@@ -47,9 +53,9 @@ registerBlockType('lendedu/financial-grid', {
                         value={attributes.description}
                         onChange={(description) => setAttributes({ description })}
                     />
-                    <div className="financial-grid_items">
+                    <div className="card_items">
                         <InnerBlocks
-                            allowedBlocks={['lendedu/financial-grid-item']}
+                            allowedBlocks={['nasag/card-item']}
                             renderAppender={() => (
                                 <InnerBlocks.ButtonBlockAppender />
                             )}
@@ -66,10 +72,10 @@ registerBlockType('lendedu/financial-grid', {
           };
         
         return (
-            <div className="financial-grid" style={bgstyle}>
+            <div className="card" style={bgstyle}>
                 <RichText.Content tagName="h2" value={attributes.heading} />
                 <RichText.Content tagName="p" value={attributes.description} />
-                <div className="financial-grid-items">
+                <div className="card-items">
                     <InnerBlocks.Content />
                 </div>
             </div>

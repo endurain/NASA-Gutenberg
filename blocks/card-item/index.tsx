@@ -4,26 +4,26 @@ import { Button } from '@wordpress/components';
 import attributes from './attributes.json';
 
 
-registerBlockType('lendedu/financial-card-item', {
-    title: 'Financial Grid Item',
+registerBlockType('nasag/card-item', {
+    title: 'Card Item',
     icon: 'grid-view',
     category: 'layout',
     attributes,
 
     edit: ({ attributes, setAttributes }) => {
         // Function to update the icon URL attribute
-        const onSelectImage = (media) => {
+        const onSelectImage = (media: { url: string }) => {
             setAttributes({ imgUrl: media.url });
         };
 
         return (
-            <div className="financial-card-item">
+            <div className="card-item">
                 <MediaUpload
-                    onSelect={onSelectImage}
+                    onSelect={onSelectImage}  
                     allowedTypes={['image']}
-                    value={attributes.imgUrl}
+                    value={attributes.imUrl}
                     render={({ open }) => (
-                        <Button className="financial-card-item__media" onClick={open}>
+                        <Button className="card-item__media" onClick={open}>
                             {!attributes.imgUrl ? 'Upload Image' : <img src={attributes.imgUrl} alt="" />}
                         </Button>
                     )}
@@ -52,19 +52,19 @@ registerBlockType('lendedu/financial-card-item', {
         return (
           <>
             {attributes.link ? (
-              <a href={attributes.link} className="financial-card-item__link">
-                <div className="financial-card-item">
+              <a href={attributes.link} className="card-item__link">
+                <div className="card-item">
                   {attributes.imgUrl && (
-                    <img className="financial-card-item__icon" src={attributes.imgUrl} alt="" />
+                    <img className="card-item__icon" src={attributes.imgUrl} alt="" />
                   )}
                   <RichText.Content tagName="h3" value={attributes.heading} />
                   <RichText.Content tagName="h3" value={attributes.description} />
                 </div>
               </a>
             ) : (
-              <div className="financial-card-item">
+              <div className="card-item">
                 {attributes.imgUrl && (
-                  <img className="financial-card-item__icon" src={attributes.imgUrl} alt="" />
+                  <img className="card-item__icon" src={attributes.imgUrl} alt="" />
                 )}
                 <RichText.Content tagName="h3" value={attributes.heading} />
                 <RichText.Content tagName="p" value={attributes.description} />

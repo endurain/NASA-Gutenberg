@@ -1,0 +1,24 @@
+{
+  "heading": {
+    "type": "string",
+    "source": "html",
+    "selector": "h2"
+  },
+  "description": {
+    "type": "string",
+    "source": "html",
+    "selector": "p"
+  },
+  "backgroundImage": {
+    "type": "string",
+    "default": ""
+  },
+  "iconUrl": {
+    "type": "string",
+    "default": ""
+  },
+  "link": {
+    "type": "string",
+    "default": ""
+  }
+}
