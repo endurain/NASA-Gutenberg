@@ -3,7 +3,13 @@ import { RichText } from '@wordpress/block-editor';
 import { useEffect, useState } from '@wordpress/element';
 import attributes from './attributes.json';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.css';
+import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 // nasaBlockSettings is a global variable
 declare const nasaBlockSettings: {
@@ -15,20 +21,26 @@ interface BlockAttributes {
     description: string;
 }
 
+interface RoverImageAttributes {
+    img_src: string;
+    camera: {
+        full_name: string;
+    };
+}
+
 registerBlockType<BlockAttributes>('nasag/rover-slider', {
     title: 'Mars Rover Slider',
     icon: 'slides',
     category: 'layout',
     attributes: attributes as BlockConfiguration<BlockAttributes>['attributes'], 
     edit: ({ attributes, setAttributes }) => {
-        const [images, setImages] = useState([]);
+        const [images, setImages] = useState<RoverImageAttributes[]>([]);
 
         useEffect(() => {
             // Use the API key directly
             const api_key = nasaBlockSettings.api_key;
             fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${api_key}`)
                 .then(response => response.json())
-
                 .then(data => {
                     setImages(data.photos.slice(0, 5)); // Limit to first 5 images
                 });
@@ -54,6 +66,8 @@ registerBlockType<BlockAttributes>('nasag/rover-slider', {
                         spaceBetween={10}
                         slidesPerView={1}
                         navigation
+                        pagination={{ clickable: true }}
+                        scrollbar={{ draggable: true }}
                     >
                         {images.map((image, index) => (
                             <SwiperSlide key={index}>

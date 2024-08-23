@@ -1,21 +1,8 @@
-<?php 
-
-function localize_block_scripts($block_name) {
-    $localized_data = [];
-
-    // rover slider block
-    if ($block_name === 'rover-slider') {
-        $localized_data['api_key'] = get_option('nasa_api_key', '');
-    }
-    if (!empty($localized_data)) {
-        wp_localize_script($block_name . '-editor-script', 'nasaBlockSettings', $localized_data);
-    }
-}
+<?php
 
 function register_gutenberg_blocks() {
     $block_directories = glob(get_stylesheet_directory() . '/blocks/*', GLOB_ONLYDIR);
 
-    // Specify any dynamic blocks here using the block dir name 
     $dynamic_blocks = [
         'card',
         'rover-slider'
@@ -49,7 +36,6 @@ function register_gutenberg_blocks() {
             $render_callback_file = get_stylesheet_directory() . "/blocks/{$block_name}/render-{$block_name}.php";
             if (file_exists($render_callback_file)) {
                 include $render_callback_file;
-                // The included file should define a function named after the convention 'render_block_name'.
                 $render_callback_function_name = 'render_' . str_replace('-', '_', $block_name);
                 if (function_exists($render_callback_function_name)) {
                     $block_args['render_callback'] = $render_callback_function_name;
@@ -66,12 +52,17 @@ function register_gutenberg_blocks() {
                 $block_name . '-editor-script',
                 get_stylesheet_directory_uri() . $editor_script_path,
                 $asset_file['dependencies'],
-                $asset_file['version']
+                $asset_file['version'],
+                true // Load in footer
             );
 
-            // Localize the script
-            localize_block_scripts($block_name);
-            
+            if ($block_name === 'rover-slider') {
+                $api_key = get_option('nasa_api_key', '');
+                wp_localize_script($block_name . '-editor-script', 'nasaBlockSettings', array(
+                    'api_key' => $api_key,
+                ));
+            }
+
             if (file_exists(get_stylesheet_directory() . $editor_style_path)) {
                 wp_enqueue_style(
                     $block_name . '-editor-style',
@@ -82,7 +73,7 @@ function register_gutenberg_blocks() {
             }
         });
 
-        // Enqueue the front-end style.
+        // Enqueue the front-end style and scripts.
         add_action('wp_enqueue_scripts', function() use ($style_path, $block_name) {
             if (file_exists(get_stylesheet_directory() . $style_path)) {
                 wp_enqueue_style(
@@ -90,6 +81,24 @@ function register_gutenberg_blocks() {
                     get_stylesheet_directory_uri() . $style_path,
                     array(),
                     filemtime(get_stylesheet_directory() . $style_path)
+                );
+            }
+
+            // Ensure Swiper is enqueued for the frontend.
+            if ($block_name === 'rover-slider') {
+                wp_enqueue_script(
+                    'swiper-js',
+                    'https://unpkg.com/swiper/swiper-bundle.min.js',
+                    array(),
+                    '11.1.10',
+                    true // Load in footer
+                );
+
+                wp_enqueue_style(
+                    'swiper-css',
+                    'https://unpkg.com/swiper/swiper-bundle.min.css',
+                    array(),
+                    '11.1.10'
                 );
             }
         });
