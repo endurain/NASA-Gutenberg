@@ -1,9 +1,21 @@
 <?php 
 
+function localize_block_scripts($block_name) {
+    $localized_data = [];
+
+    // rover slider block
+    if ($block_name === 'rover-slider') {
+        $localized_data['api_key'] = get_option('nasa_api_key', '');
+    }
+    if (!empty($localized_data)) {
+        wp_localize_script($block_name . '-editor-script', 'nasaBlockSettings', $localized_data);
+    }
+}
+
 function register_gutenberg_blocks() {
     $block_directories = glob(get_stylesheet_directory() . '/blocks/*', GLOB_ONLYDIR);
 
-    // Specify which blocks are dynamic 
+    // Specify any dynamic blocks here using the block dir name 
     $dynamic_blocks = [
         'card',
         'rover-slider'
@@ -56,6 +68,9 @@ function register_gutenberg_blocks() {
                 $asset_file['dependencies'],
                 $asset_file['version']
             );
+
+            // Localize the script
+            localize_block_scripts($block_name);
             
             if (file_exists(get_stylesheet_directory() . $editor_style_path)) {
                 wp_enqueue_style(
@@ -81,4 +96,3 @@ function register_gutenberg_blocks() {
     }
 }
 add_action('init', 'register_gutenberg_blocks');
-

@@ -94,6 +94,8 @@ module.exports = {
         if (pathData.chunk.name.endsWith('-style')) {
           return pathData.chunk.name.replace('-style', '/style.css');
         }
+        // fallback
+        return '[name].css';
       },
     }),
     new DependencyExtractionWebpackPlugin({ injectPolyfill: true }),
@@ -102,7 +104,7 @@ module.exports = {
   mode: 'production',
 
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    static: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000,
   },
