@@ -3,13 +3,14 @@
 function render_rover_slider($attributes, $content) {
     $heading = isset($attributes['heading']) ? $attributes['heading'] : '';
     $description = isset($attributes['description']) ? $attributes['description'] : '';
+    $rover = 'curiosity';
 
     $api_key = get_option('nasa_api_key', '');
     if (empty($api_key)) {
         return '<div class="rover-slider">NASA API key is missing. Add it via wp-admin.</div>';
     }
 
-    $response = wp_remote_get("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key={$api_key}");
+    $response = wp_remote_get("https://api.nasa.gov/mars-photos/api/v1/rovers/{$rover}/photos?sol=1000&api_key={$api_key}");
     
     if (is_wp_error($response)) {
         return '<div class="rover-slider">Error fetching images.</div>';

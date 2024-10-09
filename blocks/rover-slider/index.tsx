@@ -6,10 +6,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+// import 'swiper/css';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import 'swiper/css/scrollbar';
 
 // nasaBlockSettings is a global variable
 declare const nasaBlockSettings: {
@@ -35,7 +35,14 @@ registerBlockType<BlockAttributes>('nasag/rover-slider', {
     attributes: attributes as BlockConfiguration<BlockAttributes>['attributes'], 
     edit: ({ attributes, setAttributes }) => {
         const [images, setImages] = useState<RoverImageAttributes[]>([]);
+        let loader = `<div class="rover-slider__loader"></div>`;
+        let roverSliderId = document.getElementById('roverSlider');
+        let responseHeading = `<h2 class="rover-slider__heading>Rover Images</h2>`;
 
+        if (roverSliderId !== null ) {
+            roverSliderId.innerHTML = loader;
+        }
+       
         useEffect(() => {
             // Use the API key directly
             const api_key = nasaBlockSettings.api_key;
@@ -44,6 +51,9 @@ registerBlockType<BlockAttributes>('nasag/rover-slider', {
                 .then(data => {
                     setImages(data.photos.slice(0, 5)); // Limit to first 5 images
                 });
+                if (roverSliderId !== null ) {
+                    roverSliderId.innerHTML = responseHeading;
+                }
         }, []);
 
         return (

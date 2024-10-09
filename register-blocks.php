@@ -47,7 +47,13 @@ function register_gutenberg_blocks() {
         register_block_type("nasag/{$block_name}", $block_args);
 
         // Enqueue the editor script and style.
-        add_action('enqueue_block_editor_assets', function() use ($editor_script_path, $asset_file, $block_name, $editor_style_path) {
+        add_action('enqueue_block_editor_assets', 
+        function() use (
+        $editor_script_path,
+        $asset_file,
+        $block_name,
+        $editor_style_path) 
+        {
             wp_enqueue_script(
                 $block_name . '-editor-script',
                 get_stylesheet_directory_uri() . $editor_script_path,
@@ -93,7 +99,6 @@ function register_gutenberg_blocks() {
                     '11.1.10',
                     true // Load in footer
                 );
-
                 wp_enqueue_style(
                     'swiper-css',
                     'https://unpkg.com/swiper/swiper-bundle.min.css',
@@ -101,6 +106,7 @@ function register_gutenberg_blocks() {
                     '11.1.10'
                 );
             }
+
         });
     }
 }
