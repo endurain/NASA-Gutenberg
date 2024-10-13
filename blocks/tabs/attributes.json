@@ -1,0 +1,11 @@
+{
+    "heading": {
+        "type": "string",
+        "source": "html",
+        "selector": "h2"
+    },
+    "tabTitles": {
+        "type": "array",
+        "default": []
+    }
+}

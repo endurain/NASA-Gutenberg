@@ -1,0 +1,27 @@
+{
+    "backgroundImage": {
+        "type": "string",
+        "default": ""
+    },
+    "description": {
+        "type": "string",
+        "source": "html",
+        "selector": "p"
+    },
+    "link": {
+        "type": "string",
+        "default": ""
+    },
+    "linkLabel": {
+        "type": "string",
+        "default": ""
+    },
+    "linkTarget": {
+        "type": "string",
+        "default": "_self"
+    },
+    "tabTitle": {
+        "type": "string",
+        "default": "Tab"
+    }
+}
