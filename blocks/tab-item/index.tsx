@@ -95,10 +95,10 @@ registerBlockType('nasag/tab-item', {
                 <a
                     href={link}
                     target={linkTarget}
-                    rel={linkTarget === '_blank' ? 'noopener noreferrer' : 'noopener'}  // Include the rel attribute
+                    rel={linkTarget === '_blank' ? 'noopener noreferrer' : 'noopener'} 
                     className="tab-item__link"
                 >
-                    {linkLabel || 'Click here'}
+                    {linkLabel || 'Learn more'}
                 </a>
             )}
             </div>

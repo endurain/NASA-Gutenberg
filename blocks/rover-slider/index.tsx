@@ -3,13 +3,6 @@ import { RichText } from '@wordpress/block-editor';
 import { useEffect, useState } from '@wordpress/element';
 import attributes from './attributes.json';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
-
-// Import Swiper styles
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
-// import 'swiper/css/scrollbar';
 
 // nasaBlockSettings is a global variable
 declare const nasaBlockSettings: {

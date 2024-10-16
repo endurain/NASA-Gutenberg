@@ -90,7 +90,7 @@ function register_gutenberg_blocks() {
                 );
             }
 
-            // Ensure Swiper is enqueued for the frontend.
+            // ROVER BLOCK: Ensure Swiper is enqueued for the frontend.
             if ($block_name === 'rover-slider') {
                 wp_enqueue_script(
                     'swiper-js',
@@ -104,6 +104,16 @@ function register_gutenberg_blocks() {
                     'https://unpkg.com/swiper/swiper-bundle.min.css',
                     array(),
                     '11.1.10'
+                );
+            }
+            // TABS BLOCK
+            if ($block_name === 'tabs') {
+                wp_enqueue_script(
+                    'tabs-switching-script',
+                    get_stylesheet_directory_uri() . '/inc/js/tabs.js', 
+                    [], 
+                    null,   
+                    true    
                 );
             }
 

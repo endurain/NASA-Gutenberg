@@ -69,8 +69,8 @@ registerBlockType('nasag/tabs', {
 
                 {/* generate the tab buttons based on saved content */}
                 <div className="tab-titles">
-                {attributes.tabTitles.map((tabTitle, index) => (
-                        <button key={index} id="t-`{index}`" className="tab-button">
+                    {attributes.tabTitles.map((tabTitle, index) => (
+                        <button key={index} className="tab-button">
                             {tabTitle}
                         </button>
                     ))}
@@ -79,7 +79,7 @@ registerBlockType('nasag/tabs', {
                 {/* The tab content */}
                 <div className="tab-content">
                     <InnerBlocks.Content />
-                </div>
+                </div>    
             </div>
         );
     },
