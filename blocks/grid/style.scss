@@ -1,6 +1,39 @@
+.grid {
+    padding: 2rem;
+    margin: 3rem 0;
+    background-size: cover;
+
+    h2 {
+        color: #fff;
+    }
+}
+
 .grid-items {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 16px;
 
+}
+
+.tab-titles {
+
+    .tab-button {
+        height: 49px;
+        box-sizing: border-box;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 20px 1px 10px 1px;
+        padding: 6px 17px;
+        text-transform: uppercase;
+        border: 3px solid rgba(119, 126, 140, 0.5);
+        transition: 0.3s;
+        background: none;
+        cursor: pointer;
+
+        &.active {
+            border: 3px solid #e87b7b;
+        }
+    }
 }

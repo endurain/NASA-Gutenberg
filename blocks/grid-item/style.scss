@@ -13,17 +13,22 @@
     padding-right: 8px;
     padding-top: 32px;
     width: 166px;
+    transition: .3s;
+
+    &:hover {
+        background-color: #e0e0e069;
+        transition: .3s;
+    }
 
     &__icon {
         display: block;
         margin: auto;
-        max-height: 26px;
-        min-width: 26px;
-        width: 26px; 
+        max-height: 45px;
+        min-width: 45px;
+        width: 45px; 
     }
 
     &__link {
-        display: flex;
-        justify-content: center;
+        text-decoration: none;
     }
 }

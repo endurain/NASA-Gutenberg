@@ -1,0 +1,14 @@
+.tab-item {
+    position: relative;
+    margin-top: 55px;
+
+    &__title {
+        position: absolute;
+        top: -65px;
+        left: -65px;
+    }
+
+    &__description, &__tagline {
+        color: #fff;
+    }
+}

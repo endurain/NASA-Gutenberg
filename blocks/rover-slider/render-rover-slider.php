@@ -12,6 +12,7 @@ function render_rover_slider($attributes, $content) {
 
     $response = wp_remote_get("https://api.nasa.gov/mars-photos/api/v1/rovers/{$rover}/photos?sol=1000&api_key={$api_key}");
     
+    // error check
     if (is_wp_error($response)) {
         return '<div class="rover-slider">Error fetching images.</div>';
     }

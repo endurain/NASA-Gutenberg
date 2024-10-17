@@ -3,6 +3,11 @@
         "type": "string",
         "default": ""
     },
+    "tagLine": {
+        "type": "string",
+        "source": "html",
+        "selector": "p"
+    },
     "description": {
         "type": "string",
         "source": "html",
@@ -22,6 +27,6 @@
     },
     "tabTitle": {
         "type": "string",
-        "default": "Tab"
+        "default": ""
     }
 }

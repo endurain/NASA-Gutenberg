@@ -2,7 +2,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { RichText, MediaUpload } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
 import attributes from './attributes.json';
-import CustomLinkPicker from '../../components/CustomLinkPicker'; 
+import LinkSelector from '../../components/LinkSelector'; 
 
 registerBlockType('nasag/tab-item', {
     title: 'Tab Item',
@@ -11,8 +11,8 @@ registerBlockType('nasag/tab-item', {
     attributes,
 
     edit: ({ attributes, setAttributes }) => {
-        const { backgroundImage, description, link, linkTarget, linkLabel, tabTitle } = attributes;
-
+        const { backgroundImage, description, link, linkTarget, linkLabel, tabTitle, tagLine } = attributes;
+        
         const handleLinkChange = ({ url, opensInNewTab, linkLabel }) => {
             setAttributes({
                 link: url,
@@ -40,6 +40,7 @@ registerBlockType('nasag/tab-item', {
                     value={tabTitle}
                     onChange={(tabTitle) => setAttributes({ tabTitle })}
                     placeholder="Tab Title"
+                    className="tab-item__title"
                 />
 
                 {/* Background Image Upload */}
@@ -54,16 +55,26 @@ registerBlockType('nasag/tab-item', {
                     )}
                 />
 
+                {/* Tagline/Eyebrow */}
+                <RichText
+                    tagName="p"
+                    value={tagLine}
+                    onChange={(tagLine) => setAttributes({ tagLine })}
+                    placeholder="Enter Tag Line"
+                    className="tab-item__tagline"
+                />
+
                 {/* Description */}
                 <RichText
                     tagName="p"
                     value={description}
                     onChange={(description) => setAttributes({ description })}
-                    placeholder="Description"
+                    placeholder="Add description"
+                    className="tab-item__description"
                 />
 
                 {/* Custom Link Picker for URL, Label, and Open in New Tab */}
-                <CustomLinkPicker
+                <LinkSelector
                     url={link}
                     opensInNewTab={linkTarget === '_blank'}
                     linkLabel={linkLabel}
@@ -74,7 +85,7 @@ registerBlockType('nasag/tab-item', {
     },
 
     save: ({ attributes }) => {
-        const { backgroundImage, description, link, linkLabel, linkTarget, tabTitle } = attributes;
+        const { backgroundImage, description, link, linkLabel, linkTarget, tagLine } = attributes;
 
         return (
             <div
@@ -85,22 +96,25 @@ registerBlockType('nasag/tab-item', {
                     backgroundPosition: 'center',
                 }}
             >
-                {/* Tab Title */}
-                <RichText.Content tagName="h3" value={tabTitle} />
+                <div className="tab-item__content">
+                    {/* Tagline/Eyebrow */}
+                    <RichText.Content tagName="p" value={tagLine} className="tab-item__tagline" />
+                    {/* Description */}
+                    <RichText.Content tagName="p" value={description} className="tab-item__description" />
 
-                <RichText.Content tagName="p" value={description} />
-
-                {/* Render the Link */}
-                {link && (
-                <a
-                    href={link}
-                    target={linkTarget}
-                    rel={linkTarget === '_blank' ? 'noopener noreferrer' : 'noopener'} 
-                    className="tab-item__link"
-                >
-                    {linkLabel || 'Learn more'}
-                </a>
-            )}
+                    {/* Render the Link */}
+                    {link && (
+                    <a
+                        href={link}
+                        target={linkTarget}
+                        rel={linkTarget === '_blank' ? 'noopener noreferrer' : 'noopener'} 
+                        className="tab-item__link"
+                    >
+                        {linkLabel || 'Learn more'}
+                    </a>
+                
+                    )}
+                </div>
             </div>
         );
     },

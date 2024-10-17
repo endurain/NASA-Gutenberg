@@ -12,7 +12,8 @@ registerBlockType('nasag/tabs', {
     edit: ({ attributes, setAttributes, clientId }) => {
         const blockProps = useBlockProps();
 
-        // Use `useSelect` from `@wordpress/data` to get the inner blocks (tab-items)
+        // access data from the WordPress data stores
+        // useSelect to get the inner blocks tab-items
         const tabItems = useSelect(select => {
             const { getBlock } = select('core/block-editor');
             const block = getBlock(clientId);
@@ -36,18 +37,6 @@ registerBlockType('nasag/tabs', {
                     onChange={(heading) => setAttributes({ heading })}
                 />
 
-                {/* Render the tab buttons dynamically based on the `tabTitle` of each `tab-item` */}
-                <div className="tab-titles">
-                    {tabItems.map((tabItem, index) => {
-                        const tabTitle = tabItem.attributes.tabTitle || `Tab ${index + 1}`;
-                        return (
-                            <button key={index} className="tab-button">
-                                {tabTitle}
-                            </button>
-                        );
-                    })}
-                </div>
-
                 {/* InnerBlocks for tab content */}
                 <div className="tab-content">
                     <InnerBlocks
@@ -69,7 +58,7 @@ registerBlockType('nasag/tabs', {
 
                 {/* generate the tab buttons based on saved content */}
                 <div className="tab-titles">
-                    {attributes.tabTitles.map((tabTitle, index) => (
+                    {tabTitles.map((tabTitle, index) => (
                         <button key={index} className="tab-button">
                             {tabTitle}
                         </button>

@@ -1,0 +1,42 @@
+.tab-item {
+    position: relative;
+    min-height: 50vh;
+
+    &__content {
+        position: absolute;
+        top: 45%;
+        margin-left: 3rem;
+    }
+
+    &__tagline {
+        text-transform: uppercase;
+        color: #fff;
+    }
+
+    &__description {
+        font-size: 30px;
+        color: #fff;
+    }
+
+    &__link {
+        text-decoration: none;
+        height: 49px;
+        box-sizing: border-box;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 20px 0 10px 0;
+        padding: 14px 20px;
+        text-transform: uppercase;
+        border: 3px solid rgba(119, 126, 140, .5);
+        color: #fff;
+        transition: .3s;
+
+        &:hover {
+            background-color: #80808069;
+            transition: .3s;
+        }
+    }
+
+}

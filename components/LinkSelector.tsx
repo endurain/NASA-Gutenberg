@@ -30,7 +30,8 @@ const CustomLinkPicker = ({ url, opensInNewTab, linkLabel, onChange }) => {
     };
 
     return (
-        <div className="custom-link-picker">
+        <div 
+            className="custom-link-picker">
             <Button onClick={() => setIsLinkPickerOpen(!isLinkPickerOpen)} variant="secondary">
                 {url ? 'Edit Link' : 'Add Link'}
             </Button>
@@ -56,6 +57,9 @@ const CustomLinkPicker = ({ url, opensInNewTab, linkLabel, onChange }) => {
                         onChange={handleLabelChange}
                         placeholder="Enter Link Text"
                     />
+                    <Button onClick={() => setIsLinkPickerOpen(!isLinkPickerOpen)} variant="secondary">
+                        {'Save'}
+                    </Button>
                 </Popover>
             )}
         </div>
