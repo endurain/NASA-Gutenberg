@@ -24,6 +24,7 @@ registerBlockType('nasag/tabs', {
         const updatedTabTitles = tabItems.map(tabItem => tabItem.attributes.tabTitle || `Untitled Tab`);
 
          // This ensures that the tabTitles array is updated and saved
+         // checks current value of attributes.tabTitles against updatedTabTitles
         if (JSON.stringify(attributes.tabTitles) !== JSON.stringify(updatedTabTitles)) {
             setAttributes({ tabTitles: updatedTabTitles });
         }

@@ -20,7 +20,7 @@ function render_rover_slider($attributes, $content) {
     $data = wp_remote_retrieve_body($response);
     $photos = json_decode($data, true)['photos'];
     
-    // Check if we got any photos
+    // if there are no rover photos
     if (empty($photos)) {
         return '<div class="rover-slider">No photos available.</div>';
     }
